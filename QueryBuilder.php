@@ -60,6 +60,8 @@ class QueryBuilder extends \yii\db\QueryBuilder
         if ($union !== '') {
             $sql = "($sql){$this->separator}$union";
         }
+        ksort($params, SORT_NATURAL);
+        $params = array_reverse($params, true);
         foreach ($params as $key => $value) {
             $sql = str_replace($key, self::preparationValue($value), $sql);
         }
